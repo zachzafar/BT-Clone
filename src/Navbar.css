@@ -1,0 +1,44 @@
+
+.Navbar { 
+    display: flex;
+    flex-direction: row;
+    background-color: #000000;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid white
+}
+
+.navbar-main {
+    color: white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    align-items: center;
+}
+
+
+.navbar-element{
+    padding: 20px;
+}
+
+.MenuIcon {
+    color: white;
+    margin-left: 100px;
+}
+
+.MenuIcon:hover {
+    color: #F6F930;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.navbar-element:hover {
+    color: #F6F930;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.navbar-element > h3 {
+    margin: 0;
+}

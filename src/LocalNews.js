@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 
 function LocalNews() {
   const [lists, setList] = useState([]);
+  const [newsUpdate, setNewsUpdate] = useState(0);
 
   useEffect(() => {
     loadPosts()
   }, []);
+  
 
   const loadPosts = async () => {
     let list = [];

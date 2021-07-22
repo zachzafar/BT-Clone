@@ -3,11 +3,24 @@ import "./Navbar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({Menu,menuOpt }) {
+  const navbarList = ["Sports News","Buisness","Politics","Regional","World","Subscribe"]
+
+  /*
+   {navbarList.map((item) => {
+        <div className="navbar-element">
+          <Link to={`/section/${item}/`} style={{ textDecoration: "none", color: "white" }}>
+            <h5>{item}</h5>
+          </Link>
+        </div>
+      })}
+  
+  */ 
   return (
     <div className="Navbar">
       <div className="navbar-main">
-        <div className="navbar-element">
+     
+      <div className="navbar-element">
           <Link
             to={"/"}
             className="navbar-element"
@@ -48,7 +61,7 @@ function Navbar() {
         </div>
       </div>
       <div className="MenuIcon">
-        <MenuIcon fontSize="large" />
+        <MenuIcon fontSize="large" onClick={Menu}/>
       </div>
     </div>
   );

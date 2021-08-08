@@ -2,14 +2,15 @@
 .Navbar { 
     display: flex;
     flex-direction: row;
-    background-color: #000000;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid white
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 30px;
+    color: white;
+    background-color: black
 }
 
 .navbar-main {
-    color: white;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -18,12 +19,15 @@
 
 
 .navbar-element{
-    padding: 20px;
+    padding: 15px;
+    font-weight: 900;
+   
 }
 
 .MenuIcon {
-    color: white;
-    margin-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 50px;
 }
 
 .MenuIcon:hover {

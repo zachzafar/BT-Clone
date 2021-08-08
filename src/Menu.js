@@ -4,7 +4,6 @@ import CloseIcon from '@material-ui/icons/Close';
 
 
 function Menu({Menu}) {
-
     return (
         <div className="Menu">
         <CloseIcon onClick={Menu} fontSize="large"/>

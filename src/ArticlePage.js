@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import "./HomePage.css"
+import InfiniteScroll from "react-infinite-scroll-component"
 
-function ArticlePage() {
+function ArticlePage({articleImage}) {
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
 
   useEffect(() => {
     axios
-      .get(`posts/${articleId}`)
+      .get(`/posts/${articleId}`)
       .then((res) => {
         let post = {
           title: res.data.title.rendered,
@@ -22,32 +24,12 @@ function ArticlePage() {
       });
   }, []);
 
-  /*const loadPosts = async () => {
-    let list = [];
-    try {
-      const posts = await axios.get(`${articleId}`);
-      const data = posts.data;
-      console.log(data);
-      data.map(async (post) => {
-        let featuredMedia = await axios.get(`media/${post.featured_media}`);
-        list.push({
-          id: post.id,
-          title: post.title.rendered,
-          description: post.excerpt.rendered,
-          image: featuredMedia.data.guid.rendered,
-        });
-      });
-
-      setList(list);
-    } catch (err) {
-      console.log(err);
-    }
-  };*/
   console.log(articleId)
   return (
-    <div>
-      <h1>{article.title}</h1>
-      <p>{article.body}</p>
+    <div className="HomePage">
+      <img src={articleImage} />
+      <h1 dangerouslySetInnerHTML={{ __html: article.title }}></h1>
+      <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
     </div>
   );
 }

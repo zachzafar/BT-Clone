@@ -5,9 +5,7 @@
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #d6d6d6;
-    margin-bottom: 30px;
-    color: white;
-    background-color: black
+
 }
 
 .navbar-main {
@@ -20,7 +18,7 @@
 
 .navbar-element{
     padding: 15px;
-    font-weight: 900;
+    
    
 }
 
@@ -42,6 +40,7 @@
     transition: 1s;
 }
 
-.navbar-element > h3 {
+.navbar-element > h5 {
     margin: 0;
+    font-weight: 900;
 }

@@ -3,3 +3,6 @@
     grid-template-columns: 22vw 50vw
 }
 
+.body > p {
+    margin: 0;
+}

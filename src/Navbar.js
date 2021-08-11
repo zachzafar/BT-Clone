@@ -24,39 +24,39 @@ function Navbar({Menu,menuOpt }) {
           <Link
             to={"/"}
             className="navbar-element"
-            style={{ textDecoration: "none", color: "white" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <h3>BARBADOS TODAY</h3>
+            <img src="/BTLogo.jpg" width="200" height="50"  />
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/sports" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Sports</h5>
+          <Link to="/category/sports" style={{ textDecoration: "none", color: "black", fontWeight: "900"  }}>
+           Sports
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/business" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Buisness</h5>
+          <Link to="/category/business" style={{ textDecoration: "none", color: "black",fontWeight: "900" }}>
+            Buisness
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/politics" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Politics</h5>
+          <Link to="/category/politics" style={{ textDecoration: "none", color: "black",fontWeight: "900" }}>
+            Politics
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/regional" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Regional</h5>
+          <Link to="/category/regional" style={{ textDecoration: "none", color: "black",fontWeight: "900" }}>
+            Regional
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/local-news" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Local</h5>
+          <Link to="/category/local-news" style={{ textDecoration: "none", color: "black",fontWeight: "900" }}>
+            Local
           </Link>
         </div>
         <div className="navbar-element">
-          <Link to="/category/Subscribe" style={{ textDecoration: "none", color: "white" }}>
-            <h5>Subscribe</h5>
+          <Link to="/category/Subscribe" style={{ textDecoration: "none", color: "black", fontWeight: "900" }}>
+            Subscribe
           </Link>
         </div>
       </div>

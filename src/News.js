@@ -50,23 +50,23 @@ function News() {
         {list.map((item, key) => {
           console.log(item);
           return (
-            <div key={key}>
-              <div>
+            <div key={key} style={styles.article}>
                 <img src={item.image} alt={"s"} width="150px" height="100px" />
-
+                <div  style={styles.textArea}> 
                 <Link to={`posts/${item.id}`} style={{ textDecoration: "none", color: "black" , fontWeight: "bold" }}>
                   <div
+                    style={styles.title}
                     className="title"
                     dangerouslySetInnerHTML={{ __html: item.title}}
                   ></div>
                 </Link>
-
                 <div
-                  className="Body"
+                  className="body"
                   style={styles.textbox}
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 ></div>
               </div>
+               
             </div>
           );
         })}
@@ -78,22 +78,32 @@ function News() {
 const styles = {
   textbox: {
     width: "20vw",
-    overflow: "hidden",
     height: "10vh",
+    overflow: "hidden",
+    fontSize: "10px",
+    paddingLeft: "5px",
+    
   },
   title: {
-    width: "20vw",
+    fontSize: "11px",
+    paddingLeft: "5px"
   },
   container: {
     overflow: "auto",
     height: "100vh",
-    width: "30vw",
+    width: "35vw",
   },
   text: {
     fontWeight: "900",
     fontSize: "40px",
     fontStyle: "italic",
-  }
+  },
+  article:{
+    display: "flex",
+    flexDirection: "row"
+  },
+  
+
 
 };
 export default News;

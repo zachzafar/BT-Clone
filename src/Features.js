@@ -61,7 +61,7 @@ const styles = {
     fontWeight: "900",
     fontSize: "70px",
     fontStyle: "italic",
-    textDecoration: "underline"
+    textDecoration: "none"
   }
 }
 export default Features;

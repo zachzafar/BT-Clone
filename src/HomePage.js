@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Features from './Features.js'
 import Adspot from './Adspot.js'
 import News from './News.js'
@@ -11,6 +11,9 @@ import Court from './Court.js'
 
 
 function HomePage({addImage}) {
+    const [loading,setLoading] = useState(false)
+    
+
     return (
         <div className="HomePage">
             <Features addImage={addImage}/>

@@ -72,7 +72,8 @@ function Court() {
 const styles = {
     textbox: {
         width: "20vw",
-        overflow: "hidden"
+        overflow: "hidden",
+        fontSize: "12px",
     },
     title: {
         width: "20vw",

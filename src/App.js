@@ -7,11 +7,12 @@ import Admin from "./Admin";
 import ArticlePage from "./ArticlePage.js";
 import Menu from "./Menu.js";
 import Footer from "./Footer.js";
+import SearchPage from "./SearchPage.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [menu, setMenu] = useState(false);
-  const [articleImage, setImage] = useState(null);
+
 
   const adjustMenu = () => {
     setMenu(!menu);
@@ -30,13 +31,16 @@ function App() {
             ) : (
               <Switch>
                 <Route path="/category/:sectionName">
-                  <Section addImage={setImage} />
+                  <Section />
                 </Route>
                 <Route path="/posts/:articleId">
-                  <ArticlePage image={articleImage} />
+                  <ArticlePage />
+                </Route>
+                <Route path="/search/:searchTerm">
+                  <SearchPage/>
                 </Route>
                 <Route path="/">
-                  <HomePage addImage={setImage}/>
+                  <HomePage />
                 </Route>
               </Switch>
             )}

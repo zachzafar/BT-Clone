@@ -1,5 +1,9 @@
 .Menu {
-    background-color: black;
-    color: white;
+
+    height: 80vh;
     
+}
+
+.Menu > h1 {
+    margin: 0
 }

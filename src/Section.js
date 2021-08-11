@@ -4,10 +4,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Adspot from './Adspot.js'
 import "./HomePage.css"
+import Loading from "./Loading.js"
 
 function Section() {
   const { sectionName } = useParams();
-
+  const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function Section() {
         .finally(() => {
           console.log(media);
           setList(media);
+          setLoading(true);
         });
     } catch (err) {
       console.log(err);
@@ -70,7 +72,7 @@ function Section() {
   return (
     <div className="HomePage">
       <h1 className="Title" style={styles.text}>{sectionName}</h1>
-      {list.map((item, key) => {
+      {loading ? list.map((item, key) => {
         console.log(item);
         return (
           <div key={key} style={styles.article}>
@@ -86,7 +88,7 @@ function Section() {
             </div>
           </div>
         );
-      })}
+      }): <Loading/>}
       <Adspot/>
     </div>
   );

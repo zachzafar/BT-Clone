@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import "./Menu.css"
 import CloseIcon from '@material-ui/icons/Close';
 import {useForm} from "react-hook-form"
 import {Link} from "react-router-dom"

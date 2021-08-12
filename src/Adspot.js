@@ -1,5 +1,4 @@
 import React from 'react'
-import './Adspot.css'
 
 function Adspot() {
     return (

@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Adspot from './Adspot.js'
-import "./HomePage.css"
-import Loading from "./Loading.js"
+import Adspot from "./Adspot.js";
+import Loading from "./Loading.js";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Section() {
   const { sectionName } = useParams();
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+  const [amount, setAmount] = useState(10);
 
   useEffect(() => {
     loadPosts();
   }, [sectionName]);
 
-  const loadPosts = async () => {
+  const loadPosts = async (a) => {
     try {
       let category;
       switch (sectionName) {
@@ -36,7 +37,7 @@ function Section() {
           break;
       }
       const { data: posts } = await axios.get(
-        `/posts?categories=${category}`
+        `/posts?categories=${category}&per_page=` +(a == null ? "5" : `${a}`)
       );
       const media = [];
 
@@ -69,27 +70,63 @@ function Section() {
     }
   };
 
+  const fetchData = async () => {
+    const posts = await loadPosts(amount);
+    setAmount(amount + 5);
+  };
+
   return (
     <div className="HomePage">
-      <h1 className="Title" style={styles.text}>{sectionName}</h1>
-      {loading ? list.map((item, key) => {
-        console.log(item);
-        return (
-          <div key={key} style={styles.article}>
-            <div>
-              <img src={item.image} alt={"s"} width="450px" height="300px"/>
-             
-                <Link to={`/posts/${item.id}`} style={{ textDecoration: "none", color: "black",fontWeight: "bold" }}>
-                <div className=""  dangerouslySetInnerHTML={{ __html: item.title }}></div>
-                </Link>
-              
-              <div className="" dangerouslySetInnerHTML={{ __html: item.description }}>
+      <h1 className="Title" style={styles.text}>
+        {sectionName}
+      </h1>
+      <InfiniteScroll
+        dataLength={list.length}
+        next={fetchData}
+        hasMore={true}
+        loader={<Loading />}
+        endMessage={<p>You've Seen it all</p>}
+      >
+        {loading ? (
+          list.map((item, key) => {
+            console.log(item);
+            return (
+              <div key={key} style={styles.article}>
+                <div>
+                  <img
+                    src={item.image}
+                    alt={"s"}
+                    width="450px"
+                    height="300px"
+                  />
+
+                  <Link
+                    to={`/posts/${item.id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <div
+                      className=""
+                      dangerouslySetInnerHTML={{ __html: item.title }}
+                    ></div>
+                  </Link>
+
+                  <div
+                    className=""
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  ></div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      }): <Loading/>}
-      <Adspot/>
+            );
+          })
+        ) : (
+          <Loading />
+        )}
+        <Adspot />
+      </InfiniteScroll>
     </div>
   );
 }
@@ -98,10 +135,10 @@ const styles = {
   text: {
     textTransform: "uppercase",
   },
-  article : {
-    borderBottom : "1px solid #d6d6d6",
-    paddingTop: "10px"
-  }
-}
+  article: {
+    borderBottom: "1px solid #d6d6d6",
+    paddingTop: "10px",
+  },
+};
 
 export default Section;

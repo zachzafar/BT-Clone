@@ -3,7 +3,6 @@ import Features from './Features.js'
 import Adspot from './Adspot.js'
 import News from './News.js'
 import MostWatched from './MostWatched.js'
-import "./HomePage.css"
 import TopStories from './TopStories.js'
 import Buisness from './Buisness.js'
 import ExploreMore from './ExploreMore.js'

@@ -80,6 +80,7 @@ function Section() {
       <h1 className="Title" style={styles.text}>
         {sectionName}
       </h1>
+      
       <InfiniteScroll
         dataLength={list.length}
         next={fetchData}
@@ -89,8 +90,9 @@ function Section() {
       >
         {loading ? (
           list.map((item, key) => {
-            console.log(item);
+            console.log(key)
             return (
+              <div>
               <div key={key} style={styles.article}>
                 <div>
                   <img
@@ -119,13 +121,18 @@ function Section() {
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   ></div>
                 </div>
+               
               </div>
-            );
+              {key % 4 === 0 && key !== 0 ? <Adspot/>: null}       
+              </div>
+            )
+            
+            
           })
         ) : (
           <Loading />
         )}
-        <Adspot />
+        
       </InfiniteScroll>
     </div>
   );

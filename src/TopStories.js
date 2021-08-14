@@ -82,10 +82,15 @@ function TopStories({addImage}) {
 
 const styles = {
     textbox: {
+        display: "block",
         width: "20vw",
         overflow: "hidden",
         margin: 0,
-        fontSize: "12px"
+        fontSize: "13px",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        
+        
     },
     title: {
         width: "20vw",

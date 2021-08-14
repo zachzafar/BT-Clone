@@ -36,7 +36,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Sports
+                SPORTS
               </Link>
             </div>
             <div className="navbar-element">
@@ -48,7 +48,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Buisness
+                BUSINESS
               </Link>
             </div>
             <div className="navbar-element">
@@ -60,7 +60,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Politics
+                POLITICS
               </Link>
             </div>
             <div className="navbar-element">
@@ -72,7 +72,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Regional
+                REGIONAL
               </Link>
             </div>
             <div className="navbar-element">
@@ -84,7 +84,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Local
+                LOCAL
               </Link>
             </div>
             <div className="navbar-element">
@@ -96,7 +96,7 @@ function Navbar({ Menu, menuOpt }) {
                   fontWeight: "900",
                 }}
               >
-                Subscribe
+                SUBSCRIBE
               </Link>
             </div>
           </div>

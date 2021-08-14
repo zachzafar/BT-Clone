@@ -16,6 +16,7 @@ function HomePage({addImage}) {
     return (
         <div className="HomePage">
             <Features addImage={addImage}/>
+            <Adspot/>
             <div className="section-1"> 
             <TopStories addImage={addImage}/>
             <News addImage={addImage}/>

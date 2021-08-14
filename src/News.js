@@ -95,11 +95,13 @@ const styles = {
     width: "20vw",
     height: "10vh",
     overflow: "hidden",
-    fontSize: "10px",
+    fontSize: "13px",
     paddingLeft: "5px",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   title: {
-    fontSize: "11px",
+    fontSize: "14px",
     paddingLeft: "5px",
   },
   container: {

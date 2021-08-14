@@ -74,6 +74,8 @@ const styles = {
   textbox: {
     width: "45vw",
     overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   title: {
     width: "20vw",

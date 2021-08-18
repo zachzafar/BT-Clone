@@ -32,6 +32,8 @@ function Buisness() {
               image: featuredMedia.data.guid.rendered,
             };
           });
+        }).catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           console.log(media);

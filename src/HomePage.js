@@ -21,8 +21,10 @@ function HomePage({addImage}) {
             <TopStories addImage={addImage}/>
             <News addImage={addImage}/>
             </div>
+            <Adspot/>
             <MostWatched addImage={addImage}/>
             <ExploreMore addImage={addImage}/>
+            <Adspot/>
             <div className="section-2">
                 <Buisness addImage={addImage}/>
                 <Court addImage={addImage}/>

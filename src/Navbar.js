@@ -1,6 +1,6 @@
 import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
+
 import { Link } from "react-router-dom";
 
 function Navbar({ Menu, menuOpt }) {

@@ -1,15 +1,20 @@
 import React, {useState} from 'react'
 import CloseIcon from '@material-ui/icons/Close';
-import {useForm} from "react-hook-form"
-import {Link} from "react-router-dom"
-
+import {Link, useHistory} from "react-router-dom"
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from "@material-ui/icons/Search";
 
 function Menu({Menu}) {
-    const [searchItem, setSearchItem] = useState()
-    const {register, handleSubmit,} = useForm();
+    const [searchItem, setSearchItem] = useState("")
+    const history = useHistory();
 
     const setItem = (event) => {
         setSearchItem(event.target.value)
+    }
+
+    const handleSubmit = () => {
+        history.push(`/search/${searchItem}`)
+        Menu()
     }
 
     return (
@@ -21,10 +26,10 @@ function Menu({Menu}) {
         <h1>SHOPPING</h1>
         <h1>MAGAZINES</h1>
         <h1>SUBSCRIBE</h1>
-        <div className="inpputBox">
+        <form className="inpputBox" onSubmit={handleSubmit}>
         <input type="text" value={searchItem} placeholder="Enter search term" onChange={setItem} />
-        <Link to={`/search/${searchItem}`}><button type="submit" onClick={Menu}></button></Link>   
-        </div>
+        <IconButton type="submit" color="primary"><SearchIcon/></IconButton>   
+        </form>
         </div>
     )
 }

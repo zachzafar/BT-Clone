@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Features.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -48,9 +47,10 @@ function Features() {
   return (
   <div className="features"> 
   {list.length > 0 ? (
-      <div className="article grid-item-1" key={list[1].key}> 
-        <img src={list[1].image} width="100%" height="550px"/>
-        <Link to={`posts/${list[1].id}`} style={{ textDecoration: "none", color: "black" }}><div style={styles.text} className="Title" dangerouslySetInnerHTML={{ __html: list[1].title}}></div></Link>
+      <div className="article" key={list[1].key}> 
+      <Link to={`posts/${list[1].id}`} style={{ textDecoration: "none", color: "black" }}><div style={styles.text} className="Title" dangerouslySetInnerHTML={{ __html: list[1].title}}></div></Link>
+        <img src={list[1].image} width="90%" height="550px" style={styles.image}/>
+       
         
     </div>) :(null)}
     </div>)
@@ -61,7 +61,13 @@ const styles = {
     fontWeight: "900",
     fontSize: "70px",
     fontStyle: "italic",
-    textDecoration: "underline"
+    textDecoration: "none",
+    textAlign: "center",
+  },
+  image: {
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   }
 }
 export default Features;

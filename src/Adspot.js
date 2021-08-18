@@ -1,5 +1,4 @@
 import React from 'react'
-import './Adspot.css'
 
 function Adspot() {
     return (
@@ -8,5 +7,7 @@ function Adspot() {
         </div>
     )
 }
+
+
 
 export default Adspot

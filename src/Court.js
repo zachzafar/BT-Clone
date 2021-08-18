@@ -71,8 +71,11 @@ function Court() {
 }
 const styles = {
     textbox: {
-        width: "20vw",
-        overflow: "hidden"
+        width: "25vw",
+        overflow: "hidden",
+        fontSize: "13px",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
     },
     title: {
         width: "20vw",

@@ -2,17 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Adspot from "./Adspot.js";
+import Loading from "./Loading";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function News() {
   const [list, setList] = useState([]);
+  const [amount, setAmount] = useState(20);
 
   useEffect(() => {
     loadPosts();
   }, []);
 
-  const loadPosts = async () => {
+  const loadPosts = async (a) => {
     try {
-      const { data: posts } = await axios.get("posts/");
+      const { data: posts } = await axios.get(
+        "/posts?per_page=" + (a == null ? "10" : `${a}`)
+      );
       const media = [];
 
       const promises = posts.map((post) => {
@@ -43,34 +48,44 @@ function News() {
     }
   };
 
+  const fetchData = async () => {
+    const posts = await loadPosts(amount);
+    setAmount(amount + 10);
+  };
+
   return (
     <div width="50px">
       <h1 className="Title">Latest Stories</h1>
-      <div style={styles.container}>
-        {list.map((item, key) => {
-          console.log(item);
-          return (
-            <div key={key}>
-              <div>
-                <img src={item.image} alt={"s"} width="150px" height="100px" />
 
-                <Link to={`posts/${item.id}`} style={{ textDecoration: "none", color: "black" , fontWeight: "bold" }}>
-                  <div
-                    className="title"
-                    dangerouslySetInnerHTML={{ __html: item.title}}
-                  ></div>
-                </Link>
-
+      {list.map((item, key) => {
+        console.log(item);
+        return (
+          <div key={key} style={styles.article}>
+            <img src={item.image} alt={"s"} width="150px" height="100px" />
+            <div style={styles.textArea}>
+              <Link
+                to={`posts/${item.id}`}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  fontWeight: "bold",
+                }}
+              >
                 <div
-                  className="Body"
-                  style={styles.textbox}
-                  dangerouslySetInnerHTML={{ __html: item.description }}
+                  style={styles.title}
+                  className="title"
+                  dangerouslySetInnerHTML={{ __html: item.title }}
                 ></div>
-              </div>
+              </Link>
+              <div
+                className="body"
+                style={styles.textbox}
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              ></div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -78,22 +93,30 @@ function News() {
 const styles = {
   textbox: {
     width: "20vw",
-    overflow: "hidden",
     height: "10vh",
+    overflow: "hidden",
+    fontSize: "13px",
+    paddingLeft: "5px",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   title: {
-    width: "20vw",
+    fontSize: "14px",
+    paddingLeft: "5px",
   },
   container: {
     overflow: "auto",
-    height: "100vh",
-    width: "30vw",
+    height: "110vh",
+    width: "35vw",
   },
   text: {
     fontWeight: "900",
     fontSize: "40px",
     fontStyle: "italic",
-  }
-
+  },
+  article: {
+    display: "flex",
+    flexDirection: "row",
+  },
 };
 export default News;

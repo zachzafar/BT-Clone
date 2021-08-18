@@ -3,12 +3,14 @@ import {useParams} from "react-router-dom"
 import axios from "axios"
 import {Link} from "react-router-dom"
 import Loading from "./Loading.js"
+import Adspot from "./Adspot.js"
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function SearchPage() {
     const {searchTerm} = useParams()
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
-    console.log(searchTerm)
+    
 
   useEffect(() => {
     loadPosts();
@@ -49,7 +51,6 @@ function SearchPage() {
   };
 
     return (
-        
         <div className="HomePage">
         <h1 className="Title" style={styles.text}> Search results based on term "{searchTerm}"</h1>
         {loading ? list.map((item, key) => {
@@ -66,6 +67,7 @@ function SearchPage() {
                 <div className="" dangerouslySetInnerHTML={{ __html: item.description }}>
                 </div>
               </div>
+              {key % 4 === 0 && key !== 0 ? <Adspot/>: null}
             </div>
           );
         }): <Loading/>}

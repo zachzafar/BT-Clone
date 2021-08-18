@@ -11,6 +11,8 @@ function TopStories({addImage}) {
     }, []);
   
     const loadPosts = async () => {
+     
+
       try {
         const { data: posts } = await axios.get(
           "posts?categories=1254&per_page=5"
@@ -23,7 +25,11 @@ function TopStories({addImage}) {
             title: post.title.rendered,
             description: post.excerpt.rendered,
           });
-  
+          const getMedia = () => {
+            axios.get(`media/${post.featured_media}`).then((response) =>{
+    
+            })
+          }
           return axios.get(`media/${post.featured_media}`);
         });
   
@@ -35,6 +41,8 @@ function TopStories({addImage}) {
                 image: featuredMedia.data.guid.rendered,
               };
             });
+          }).catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             console.log(media);

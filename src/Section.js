@@ -1,79 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Adspot from "./Adspot.js";
 import Loading from "./Loading.js";
 import InfiniteScroll from "react-infinite-scroll-component";
+import loadPostsfunc from "./functions.js"
+
 
 function Section() {
   const { sectionName } = useParams();
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(5);
 
   useEffect(() => {
-    loadPosts();
-  }, [sectionName]);
-
-  const loadPosts = async (a) => {
-    try {
-      let category;
-      switch (sectionName) {
-        case "sports":
-          category = 1544;
-          break;
-        case "business":
-          category = 91;
-          break;
-        case "regional":
-          category = 103;
-          break;
-        case "politics":
-          category = 102;
-          break;
-        case "local-news":
-          category = 99;
-          break;
-      }
-      const { data: posts } = await axios.get(
-        `/posts?categories=${category}&per_page=` +(a == null ? "5" : `${a}`)
-      );
-      const media = [];
-
-      const promises = posts.map((post) => {
-        media.push({
-          id: post.id,
-          title: post.title.rendered,
-          description: post.excerpt.rendered,
-        });
-        console.log(post.featured_media);
-        return axios.get(`/media/${post.featured_media}`);
-      });
-
-      Promise.all(promises)
-        .then((values) => {
-          values.forEach((featuredMedia, i) => {
-            media[i] = {
-              ...media[i],
-              image: featuredMedia.data.guid.rendered,
-            };
-          });
-        }).catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          console.log(media);
-          setList(media);
-          setLoading(true);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    loadPostsfunc("section",amount,sectionName,setList,setLoading);
+  }, [sectionName,amount]);
 
   const fetchData = async () => {
-    const posts = await loadPosts(amount);
     setAmount(amount + 5);
   };
 
@@ -94,34 +38,40 @@ function Section() {
           list.map((item, key) => {
             console.log(key)
             return (
-              <div>
-              <div key={key} style={styles.article}>
-                <div>
+              <div key={key} >
+              <div style={styles.article}>
+                <div className="articleSection">
+                  <div>
                   <img
                     src={item.image}
                     alt={"s"}
                     width="450px"
                     height="300px"
-                  />
-
+                  /></div>
+                  <div>
                   <Link
                     to={`/posts/${item.id}`}
                     style={{
                       textDecoration: "none",
                       color: "black",
-                      fontWeight: "bold",
+                      fontWeight: 900,
+                      fontSize: "30px",
+                    
                     }}
                   >
                     <div
                       className=""
                       dangerouslySetInnerHTML={{ __html: item.title }}
                     ></div>
-                  </Link>
-
+                  </Link> 
                   <div
                     className=""
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   ></div>
+                  </div>
+                  
+
+                  
                 </div>
                
               </div>

@@ -1,51 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import loadPostsfunc from "./functions.js"
 
 function Court() {
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadPosts();
+    loadPostsfunc("court",null,null,setList,setLoading);
   }, []);
   
-
-  const loadPosts = async () => {
-    try {
-      const { data: posts } = await axios.get('posts?categories=1171&per_page=4');
-      const media = [];
-
-      const promises = posts.map((post) => {
-        media.push({
-          id: post.id,
-          title: post.title.rendered,
-          description: post.excerpt.rendered,
-        });
-        
-        return axios.get(`media/${post.featured_media}`);
-
-      });
-
-      Promise.all(promises)
-        .then((values) => {
-          values.forEach((featuredMedia, i) => {
-            
-            media[i] = {
-              ...media[i],
-              image: featuredMedia.data.guid.rendered,
-            };
-          });
-        }).catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          console.log(media)
-          setList(media);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
     return (
         <div>
         <h1 className="Title">Court</h1>
@@ -53,7 +18,7 @@ function Court() {
         {list.map((item, key) => {
             console.log(item);
             return (
-              <div key={key} width="10vw">
+              <div key={key} width="10vw" style={styles.container}>
                 <div>
                   <img src={item.image} alt={'s'} width="150px" height="100px"/>
                   
@@ -77,7 +42,10 @@ const styles = {
         overflow: "hidden",
         fontSize: "13px",
         textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
+        display: "-webkit-box",
+        webkitLineClamp : "3",
+        webkitBoxOrient : "vertical",
+        //whiteSpace: "nowrap",
     },
     title: {
         width: "20vw",
@@ -86,7 +54,10 @@ const styles = {
           fontWeight: "900",
           fontSize: "70px",
           fontStyle: "italic",
-        }
+        },
+    container: {
+      paddingBottom: "20px",
+    }
       
 }
 

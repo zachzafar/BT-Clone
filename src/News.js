@@ -1,57 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Adspot from "./Adspot.js";
-import Loading from "./Loading";
-import InfiniteScroll from "react-infinite-scroll-component";
+import loadPostsfunc from "./functions.js"
 
 function News() {
   const [list, setList] = useState([]);
-  const [amount, setAmount] = useState(20);
+  const [amount, setAmount] = useState(9);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadPosts();
+    loadPostsfunc("list",amount,null,setList,setLoading);
   }, []);
 
-  const loadPosts = async (a) => {
-    try {
-      const { data: posts } = await axios.get(
-        "/posts?per_page=" + (a == null ? "10" : `${a}`)
-      );
-      const media = [];
-
-      const promises = posts.map((post) => {
-        media.push({
-          id: post.id,
-          title: post.title.rendered,
-          description: post.excerpt.rendered,
-        });
-
-        return axios.get(`media/${post.featured_media}`);
-      });
-
-      Promise.all(promises)
-        .then((values) => {
-          values.forEach((featuredMedia, i) => {
-            media[i] = {
-              ...media[i],
-              image: featuredMedia.data.guid.rendered,
-            };
-          });
-        }).catch((err) => {
-            console.log(err);
-        })
-        .finally(() => {
-          console.log(media);
-          setList(media);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  
   const fetchData = async () => {
-    const posts = await loadPosts(amount);
     setAmount(amount + 10);
   };
 
@@ -63,7 +25,6 @@ function News() {
         console.log(item);
         return (
           <div key={key} style={styles.article}>
-            <img src={item.image} alt={"s"} width="150px" height="100px" />
             <div style={styles.textArea}>
               <Link
                 to={`posts/${item.id}`}
@@ -85,6 +46,7 @@ function News() {
                 dangerouslySetInnerHTML={{ __html: item.description }}
               ></div>
             </div>
+            <img src={item.image} alt={"s"} width="125px" height="100px" />
           </div>
         );
       })}
@@ -98,13 +60,13 @@ const styles = {
     height: "10vh",
     overflow: "hidden",
     fontSize: "13px",
-    paddingLeft: "5px",
+    paddingRight: "5px",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
   title: {
     fontSize: "14px",
-    paddingLeft: "5px",
+    paddingRight: "5px",
   },
   container: {
     overflow: "auto",
@@ -119,6 +81,7 @@ const styles = {
   article: {
     display: "flex",
     flexDirection: "row",
+    paddingBottom: "10px",
   },
 };
 export default News;

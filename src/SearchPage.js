@@ -1,10 +1,10 @@
 import React , { useState, useEffect }from 'react'
 import {useParams} from "react-router-dom"
-import axios from "axios"
 import {Link} from "react-router-dom"
 import Loading from "./Loading.js"
 import Adspot from "./Adspot.js"
 import InfiniteScroll from "react-infinite-scroll-component";
+import loadPostsfunc from "./functions.js"
 
 function SearchPage() {
     const {searchTerm} = useParams()
@@ -13,42 +13,8 @@ function SearchPage() {
     
 
   useEffect(() => {
-    loadPosts();
+    loadPostsfunc("search",null,searchTerm,setList,setLoading);
   }, []);
-
-  const loadPosts = async () => {
-    try {
-      const { data: posts } = await axios.get(`/posts?search=${searchTerm}`);
-      const media = [];
-
-      const promises = posts.map((post) => {
-        media.push({
-          id: post.id,
-          title: post.title.rendered,
-          description: post.excerpt.rendered,
-        });
-
-        return axios.get(`/media/${post.featured_media}`);
-      });
-
-      Promise.all(promises)
-        .then((values) => {
-          values.forEach((featuredMedia, i) => {
-            media[i] = {
-              ...media[i],
-              image: featuredMedia.data.guid.rendered,
-            };
-          });
-        })
-        .finally(() => {
-          console.log(media);
-          setList(media);
-          setLoading(true);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
     return (
         <div className="HomePage">

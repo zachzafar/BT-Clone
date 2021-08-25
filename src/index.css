@@ -149,6 +149,15 @@ code {
 }
 */
 
+.topicContainer > div > h2{
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.articleSection{
+  display: flex;    
+  flex-direction: row;
+}
+
 
 .loading {
     height: 80vh;

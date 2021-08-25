@@ -1,57 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from 'react-router-dom';
-
+import loadPostsfunc from "./functions.js";
 
 function TopStories({addImage}) {
     const [list, setList] = useState([]);
-
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-      loadPosts();
+      loadPostsfunc("TopStories",null,null,setList,setLoading);
     }, []);
-  
-    const loadPosts = async () => {
-     
-
-      try {
-        const { data: posts } = await axios.get(
-          "posts?categories=1254&per_page=5"
-        );
-        const media = [];
-  
-        const promises = posts.map((post) => {
-          media.push({
-            id: post.id,
-            title: post.title.rendered,
-            description: post.excerpt.rendered,
-          });
-          const getMedia = () => {
-            axios.get(`media/${post.featured_media}`).then((response) =>{
-    
-            })
-          }
-          return axios.get(`media/${post.featured_media}`);
-        });
-  
-        Promise.all(promises)
-          .then((values) => {
-            values.forEach((featuredMedia, i) => {
-              media[i] = {
-                ...media[i],
-                image: featuredMedia.data.guid.rendered,
-              };
-            });
-          }).catch((err) => {
-            console.log(err);
-          })
-          .finally(() => {
-            console.log(media);
-            setList(media);
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    };
 
     return (
         <div>
@@ -67,7 +23,7 @@ function TopStories({addImage}) {
             console.log(key);
             if (key > 0){
               return (
-              <div key={key} width="10vw">
+              <div key={key} width="10vw" style={styles.articleContainer}>
                 <div>
                   <img src={item.image} alt={'s'} width="300vw" height="200px"/>
                  
@@ -96,12 +52,16 @@ const styles = {
         margin: 0,
         fontSize: "13px",
         textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
+        display: "-webkit-box",
+        webkitLineClamp : "3",
+        webkitBoxOrient : "vertical",
+      //  whiteSpace: "nowrap",
         
         
     },
     title: {
         width: "20vw",
+        paddingBottom: "5px",
     },
     grid: {
         display: "grid",
@@ -120,6 +80,9 @@ const styles = {
     mainImage: {
       height: "100vh",
       
+    },
+    articleContainer: {
+      paddingBottom: "20px",
     }
 }
 
